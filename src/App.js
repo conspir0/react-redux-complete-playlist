@@ -1,11 +1,28 @@
-import './App.css';
+import React, { Component } from 'react';
+import Todos from './Todos';
 
-function App() {
-  return (
-    <div className="root">
-      Hello World!
-    </div>
-  );
+class App extends Component {
+  state = {
+    todos: [
+      { id: 1, content: 'first' },
+      { id: 2, content: 'second' },
+    ]
+  }
+
+  handleDeleteTodo = (id) => {
+    const todos = this.state.todos.filter(todo => todo.id !== id);
+
+    this.setState({ todos });
+  };
+
+  render() {
+    return (
+      <div className="todo-app container">
+        <h1 className="center blue-text">Todo's</h1>
+        <Todos todos={this.state.todos} deleteTodo={this.handleDeleteTodo} />
+      </div>
+    )
+  }
 }
 
 export default App;
